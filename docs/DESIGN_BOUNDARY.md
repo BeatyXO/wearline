@@ -1,11 +1,11 @@
 # Design boundary
 
-Wearline is intentionally defined by what consensus proves:
+Wearline is defined by one consensus question:
 
-**A frozen acceptance criterion has (or has not) been demonstrated by a bounded completion-proof package.**
+**Has a frozen physical-work acceptance criterion been demonstrated by the submitted completion-proof package?**
 
-The contract is not a chronological condition-delta classifier. Completion images are complementary proof views evaluated directly against the written specification; the protocol does not require an earlier state image.
+Each requirement is evaluated directly against its written specification. A proof package contains one or two complementary completion artifacts, and the contract records only the bounded requirement verdict, evidence-sufficiency flag, reasoning, and deterministic aggregate result.
 
-The contract is also non-financial: it contains no value-bearing write method or transfer surface.
+Wearline produces an auditable compliance record. It does not custody or transfer value.
 
-These boundaries are enforced by source-invariant tests and `scripts/check_stale_terms.py` so later product work cannot accidentally introduce prohibited comparison or financial behavior.
+These boundaries are enforced by source-invariant tests and `scripts/check_stale_terms.py` so later product work cannot broaden the contract beyond requirement-level completion verification.
