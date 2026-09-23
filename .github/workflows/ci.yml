@@ -5,7 +5,7 @@ on:
   pull_request:
 
 env:
-  GENVM_VERSION: v0.3.0-rc7
+  GENVM_VERSION: v0.2.16
 
 jobs:
   contract-and-frontend:
