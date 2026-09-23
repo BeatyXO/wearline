@@ -31,7 +31,7 @@ export function AppLayout({ page, onPage, children }: { page: string; onPage: (p
 
   return <div className="shell">
     <aside className="sidebar">
-      <div className="brand"><span className="brand-mark">W</span><div><strong>Wearline</strong><small>Completion proof protocol</small></div></div>
+      <button type="button" className="brand brand-button" onClick={() => onPage('overview')} aria-label="Open Wearline overview"><span className="brand-mark">W</span><div><strong>Wearline</strong><small>Completion proof protocol</small></div></button>
       <nav>{nav.map(([key, label, Icon]) => <button key={key} className={page === key ? 'nav active' : 'nav'} onClick={() => onPage(key)}><Icon size={17}/>{label}</button>)}</nav>
       <div className="sidebar-note"><span>Primitive</span><strong>Requirement compliance</strong><small>No escrow · no pricing · no settlement</small></div>
     </aside>
