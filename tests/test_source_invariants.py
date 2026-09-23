@@ -120,6 +120,10 @@ class SourceInvariantTests(unittest.TestCase):
         self.assertIn("wallet_switchEthereumChain", genlayer)
         self.assertIn("wallet_revokePermissions", genlayer)
         self.assertIn("wearline.wallet.disconnected", genlayer)
+        self.assertNotIn("wallet_getSnaps", FRONTEND)
+        self.assertNotIn("wallet_requestSnaps", FRONTEND)
+        self.assertNotIn("client.connect('studionet')", FRONTEND)
+        self.assertIn("Open Wearline overview", app_layout)
 
     def test_canonical_deployment_is_configured(self):
         expected = "VITE_WEARLINE_CONTRACT_ADDRESS=0x9229d28C3786821c5D005952d04A9ecf565E46fF"
