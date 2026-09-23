@@ -2,11 +2,11 @@ name: deployment-parity
 
 on:
   push:
-    branches: [main]
+    branches: ["main"]
     paths:
       - ".github/workflows/deployment-parity.yml"
       - "scripts/verify_deployed_parity.py"
-  workflow_dispatch:
+  workflow_dispatch: {}
 
 permissions:
   contents: read
@@ -22,6 +22,6 @@ jobs:
           python-version: "3.12"
       - name: Verify StudioNet deployed source and schema parity
         env:
-          GENLAYER_RPC: https://studio.genlayer.com/api
-          WEARLINE_CONTRACT: 0x9229d28C3786821c5D005952d04A9ecf565E46fF
+          GENLAYER_RPC: "https://studio.genlayer.com/api"
+          WEARLINE_CONTRACT: "0x9229d28C3786821c5D005952d04A9ecf565E46fF"
         run: python scripts/verify_deployed_parity.py
