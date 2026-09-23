@@ -130,7 +130,7 @@ The wallet path uses an injected EIP-1193 provider and targets StudioNet `61999`
 
 ```bash
 cd frontend
-npm install
+npm ci
 cp .env.example .env
 npm run typecheck
 npm run build
