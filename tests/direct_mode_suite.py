@@ -30,11 +30,8 @@ def mock_image(direct_vm, url, body, *, status=200, content_type="image/jpeg"):
         re.escape(url),
         {
             "status": status,
-            "response": {
-                "status": status,
-                "headers": {"content-type": content_type.encode("ascii")},
-                "body": body.encode() if isinstance(body, str) else body,
-            },
+            "headers": {"content-type": content_type.encode("ascii")},
+            "body": body.encode() if isinstance(body, str) else body,
         },
     )
 
