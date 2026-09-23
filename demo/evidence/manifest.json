@@ -1,0 +1,33 @@
+{
+  "requirement": {
+    "label": "Electrical enclosure",
+    "acceptance_criterion": "The electrical junction must be fully enclosed in a fixed protective housing, with conduit entering the enclosure and no conductor visibly exposed.",
+    "evidence_guidance": "Provide one or two clear completion views showing the housing, enclosure edges, conduit entry points, and whether any conductor remains visibly exposed."
+  },
+  "fixtures": [
+    {
+      "file": "satisfied-front.png",
+      "scenario": "accepted-pair",
+      "sha256": "269aace69749b12e8f359737b97658b4c6f8540a9092866043fee49bd91c5455",
+      "bytes": 1435
+    },
+    {
+      "file": "satisfied-side.png",
+      "scenario": "accepted-pair",
+      "sha256": "d23096113a9ee20e26a9c53da0e9389e2c3e2f939ae3d9dac0cf2dc57538ad14",
+      "bytes": 1575
+    },
+    {
+      "file": "remediation-required.png",
+      "scenario": "remediation-required",
+      "sha256": "10f990c6d130830d08fed4f05bcfce141326671b192ca0ace2c38278bf6635e6",
+      "bytes": 1695
+    },
+    {
+      "file": "review-required.png",
+      "scenario": "review-required",
+      "sha256": "21d84fba110a8c4e94906d18b3802a004e120a1d052cc70b196d3f421cd62d18",
+      "bytes": 1701
+    }
+  ]
+}
