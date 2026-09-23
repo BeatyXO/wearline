@@ -15,7 +15,7 @@ A GenLayer work-closeout primitive that freezes atomic physical acceptance crite
 - Deployment transaction: `0xf49afa3c9b2245e9db1f226ff2cba3efd7ae2df9279b79ef1f5fa4eea3f5751b`
 - Deployment transaction explorer: https://explorer-studio.genlayer.com/tx/0xf49afa3c9b2245e9db1f226ff2cba3efd7ae2df9279b79ef1f5fa4eea3f5751b
 - Deployed contract source commit: `9c56e390f7e589e14377e70aac347939fe7ee666`
-- Contract SHA-256: `9b3ae55724fd2e55ccf81296f31451db527a55c0f8e79119da8732ddbc344594`
+- Contract SHA-256: `9b3ae55724fd2e55ccf81296f31451db527a55c0f8e79119da8732ddbc344594`\n- Source/schema parity proof: https://github.com/BeatyXO/wearline/actions/runs/35864312551
 - GitHub: https://github.com/BeatyXO/wearline
 - Hosted frontend: https://wearline.vercel.app/
 
@@ -26,7 +26,7 @@ A GenLayer work-closeout primitive that freezes atomic physical acceptance crite
 - [x] Source-invariant suite passes.
 - [x] Frontend typecheck passes.
 - [x] Frontend production build passes.
-- [ ] StudioNet source/schema parity explicitly confirmed.
+- [x] StudioNet source/schema parity explicitly confirmed via StudioNet RPC.
 - [ ] `ACCEPTED` lifecycle demonstrated live.
 - [ ] `REMEDIATION_REQUIRED` lifecycle demonstrated live.
 - [ ] `REVIEW_REQUIRED` lifecycle demonstrated live.
