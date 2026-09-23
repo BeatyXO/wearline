@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import type { ReactNode } from 'react'
-import { connectWallet, readClient, readWearline, restoreWallet, writeWearline } from '../lib/genlayer'
+import { connectWallet, disconnectInjectedWallet, errorMessage, readClient, readWearline, restoreWallet, switchToStudioNet, writeWearline } from '../lib/genlayer'
 import type { InjectedProvider } from '../lib/genlayer'
 import type { RequirementView, WorkOrderView } from '../lib/types'
 
@@ -56,6 +56,8 @@ type ContextShape = {
   order: WorkOrderView | null
   requirements: RequirementView[]
   connect: () => Promise<void>
+  switchNetwork: () => Promise<void>
+  disconnect: () => Promise<void>
   load: (id: string) => Promise<void>
   createWorkOrder: (remediator: string, title: string, scope: string) => Promise<string>
   addRequirement: (label: string, criterion: string, guidance: string) => Promise<void>
@@ -109,7 +111,7 @@ export function WearlineProvider({ children }: { children: ReactNode }) {
     setError('')
     try { return await fn() }
     catch (cause) {
-      const message = cause instanceof Error ? cause.message : String(cause)
+      const message = errorMessage(cause)
       setError(message)
       throw cause
     } finally { setBusy(false) }
@@ -121,6 +123,28 @@ export function WearlineProvider({ children }: { children: ReactNode }) {
       setAddress(next.address)
       setWalletClient(next.client)
       setWrongNetwork(false)
+    })
+  }
+
+  async function switchNetwork() {
+    await guard(async () => {
+      await switchToStudioNet()
+      const restored = await restoreWallet()
+      if (!restored?.client || restored.wrongNetwork) throw new Error('Could not switch the wallet to GenLayer StudioNet 61999.')
+      setAddress(String(restored.address))
+      setWalletClient(restored.client)
+      setWrongNetwork(false)
+    })
+  }
+
+  async function disconnect() {
+    await guard(async () => {
+      await disconnectInjectedWallet()
+      setAddress('')
+      setWalletClient(null)
+      setWrongNetwork(false)
+      setOrder(null)
+      setRequirements([])
     })
   }
 
@@ -194,7 +218,7 @@ export function WearlineProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<ContextShape>(() => ({
     address, wrongNetwork, busy, error, order, requirements,
-    connect, load, createWorkOrder, addRequirement, sealWorkOrder,
+    connect, switchNetwork, disconnect, load, createWorkOrder, addRequirement, sealWorkOrder,
     submitEvidencePackage, verifyRequirement, clearError: () => setError(''),
   }), [address, wrongNetwork, busy, error, order, requirements, walletClient])
 

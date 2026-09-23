@@ -34,10 +34,34 @@ function errorCode(error: unknown) {
   return undefined
 }
 
-function errorMessage(error: unknown) {
-  if (error instanceof Error) return error.message
-  if (typeof error === 'object' && error && 'message' in error) return String((error as { message?: unknown }).message ?? '')
-  return String(error ?? '')
+export function errorMessage(error: unknown, depth = 0): string {
+  if (error instanceof Error && error.message) return error.message
+  if (typeof error === 'string' && error.trim()) return error
+  if (typeof error === 'number' || typeof error === 'boolean') return String(error)
+  if (!error || typeof error !== 'object') return 'Unexpected wallet or network error.'
+
+  const record = error as Record<string, unknown>
+  for (const key of ['shortMessage', 'reason', 'message']) {
+    const value = record[key]
+    if (typeof value === 'string' && value.trim()) return value
+  }
+
+  if (depth < 2) {
+    for (const key of ['error', 'cause', 'data']) {
+      if (record[key] !== undefined && record[key] !== error) {
+        const nested = errorMessage(record[key], depth + 1)
+        if (nested !== 'Unexpected wallet or network error.') return nested
+      }
+    }
+  }
+
+  try {
+    const serialized = JSON.stringify(error)
+    if (serialized && serialized !== '{}') return serialized
+  } catch {
+    // Fall through to a stable user-facing message.
+  }
+  return 'Unexpected wallet or network error.'
 }
 
 export async function switchToStudioNet() {
@@ -58,6 +82,20 @@ export async function switchToStudioNet() {
       }],
     })
     await injected.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: STUDIONET_CHAIN_ID }] })
+  }
+}
+
+export async function disconnectInjectedWallet() {
+  if (!window.ethereum) return
+  const injected = provider()
+  try {
+    await injected.request({
+      method: 'wallet_revokePermissions',
+      params: [{ eth_accounts: {} }],
+    })
+  } catch {
+    // Not every injected wallet implements permission revocation.
+    // The app still clears its local session below.
   }
 }
 
