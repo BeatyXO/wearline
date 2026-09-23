@@ -10,6 +10,7 @@ FRONTEND = "\n".join(
     for path in FRONTEND_ROOT.rglob("*")
     if path.is_file() and path.suffix in {".ts", ".tsx"}
 )
+README = (ROOT / "README.md").read_text(encoding="utf-8")
 
 
 class SourceInvariantTests(unittest.TestCase):
@@ -34,7 +35,7 @@ class SourceInvariantTests(unittest.TestCase):
         self.assertIn("61999", runtime_text)
         self.assertIn("studionet", runtime_text)
 
-    def test_core_primitive_is_requirement_compliance_not_before_after_comparison(self):
+    def test_core_primitive_is_requirement_compliance(self):
         self.assertIn("WEARLINE_REQUIREMENT_VERIFIER", CONTRACT)
         self.assertIn("Frozen acceptance criterion", CONTRACT)
         for forbidden in (
@@ -93,10 +94,17 @@ class SourceInvariantTests(unittest.TestCase):
         ):
             self.assertIn(method, FRONTEND)
 
-    def test_frontend_has_no_stale_before_after_terms(self):
+    def test_frontend_stays_within_requirement_compliance_boundary(self):
         lower = FRONTEND.lower()
         for forbidden in ("move-in", "move-out", "normal wear", "new damage", "security deposit"):
             self.assertNotIn(forbidden, lower)
+
+    def test_completion_artifact_limit_is_consistent(self):
+        public_copy = (FRONTEND + "\n" + README).lower()
+        self.assertNotIn("up to three", public_copy)
+        self.assertNotIn("one to three", public_copy)
+        self.assertIn("one or two", public_copy)
+        self.assertNotIn("evidence_url_3", CONTRACT)
 
     def test_fresh_deployment_is_required(self):
         self.assertEqual((ROOT / ".env.example").read_text(encoding="utf-8").strip(), "VITE_WEARLINE_CONTRACT_ADDRESS=")
