@@ -17,7 +17,7 @@ NOTE = "Closeout photographs show the installed enclosure from front and side an
 
 @pytest.fixture
 def deployed(direct_deploy):
-    return direct_deploy(str(CONTRACT))
+    return direct_deploy(str(CONTRACT), sdk_version="v0.2.16")
 
 
 def digest(body):
