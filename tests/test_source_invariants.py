@@ -106,6 +106,21 @@ class SourceInvariantTests(unittest.TestCase):
         self.assertIn("one or two", public_copy)
         self.assertNotIn("evidence_url_3", CONTRACT)
 
+    def test_wallet_release_controls_are_present(self):
+        app_layout = (ROOT / "frontend" / "src" / "components" / "AppLayout.tsx").read_text(encoding="utf-8")
+        context = (ROOT / "frontend" / "src" / "context" / "WearlineContext.tsx").read_text(encoding="utf-8")
+        genlayer = (ROOT / "frontend" / "src" / "lib" / "genlayer.ts").read_text(encoding="utf-8")
+
+        self.assertIn("Switch to StudioNet", app_layout)
+        self.assertIn("Copy address", app_layout)
+        self.assertIn("Disconnect", app_layout)
+        self.assertIn("switchNetwork", context)
+        self.assertIn("disconnect", context)
+        self.assertIn("errorMessage(cause)", context)
+        self.assertIn("wallet_switchEthereumChain", genlayer)
+        self.assertIn("wallet_revokePermissions", genlayer)
+        self.assertIn("wearline.wallet.disconnected", genlayer)
+
     def test_canonical_deployment_is_configured(self):
         expected = "VITE_WEARLINE_CONTRACT_ADDRESS=0x9229d28C3786821c5D005952d04A9ecf565E46fF"
         self.assertEqual((ROOT / ".env.example").read_text(encoding="utf-8").strip(), expected)
