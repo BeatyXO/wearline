@@ -4,7 +4,7 @@
 
 Wearline turns a physical work scope into a frozen set of atomic acceptance criteria, lets the assigned remediator submit a bounded completion-proof package for each criterion, and uses GenLayer consensus to determine whether each requirement is actually satisfied. Deterministic contract logic then aggregates the requirement verdicts into the final work-order result.
 
-Wearline is a **specification-compliance primitive**. There are no deposits, deductions, prices, payouts, escrow balances, or transfer methods.
+Wearline is a **specification-compliance primitive**. Its output is an auditable compliance record; the contract does not custody or transfer value.
 
 ## Core primitive
 
@@ -137,6 +137,18 @@ npm run build
 npm run dev
 ```
 
+## Reproducible demo evidence
+
+Candidate proof fixtures live in [`demo/evidence/`](demo/evidence/). They are deterministic repository assets with recorded SHA-256 digests and are intended for pre-deployment rehearsal and the later StudioNet lifecycle proof. The repository does not claim any fixture produced a particular on-chain verdict until that finalized transaction is recorded after deployment.
+
+Run:
+
+```bash
+python scripts/verify_demo_evidence.py
+```
+
+to verify every committed fixture against its manifest.
+
 ## Quality checks
 
 ```bash
@@ -145,7 +157,7 @@ genvm-lint check contracts/Wearline.py
 gltest tests/direct_mode_suite.py -q
 python -m unittest tests/test_source_invariants.py -v
 python scripts/check_stale_terms.py
-cd frontend && npm install && npm run typecheck && npm run build
+cd frontend && npm ci && npm run typecheck && npm run build
 ```
 
 ## Deployment status
