@@ -1,6 +1,6 @@
 # Wearline
 
-**Requirement-level physical remediation verification on GenLayer StudioNet (chain ID `61999`).**
+**Requirement-level physical work specification-compliance verification on GenLayer StudioNet (chain ID `61999`).**
 
 Wearline turns a physical work scope into a frozen set of atomic acceptance criteria, lets the assigned remediator submit a bounded completion-proof package for each criterion, and uses GenLayer consensus to determine whether each requirement is actually satisfied. Deterministic contract logic then aggregates the requirement verdicts into the final work-order result.
 
@@ -119,7 +119,7 @@ See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/THREAT_MODEL.md`](doc
 
 ## Frontend
 
-The React/Vite reviewer interface mirrors the new lifecycle:
+The React/Vite reviewer interface mirrors the contract lifecycle:
 
 - **Overview** — explains the requirement-compliance primitive;
 - **Work order** — create/load work orders and freeze atomic requirements;
@@ -139,7 +139,7 @@ npm run dev
 
 ## Reproducible demo evidence
 
-Candidate proof fixtures live in [`demo/evidence/`](demo/evidence/). They are deterministic repository assets with recorded SHA-256 digests and are intended for pre-deployment rehearsal and the later StudioNet lifecycle proof. The repository does not claim any fixture produced a particular on-chain verdict until that finalized transaction is recorded after deployment.
+Deterministic proof fixtures live in [`demo/evidence/`](demo/evidence/) with recorded SHA-256 digests. The `satisfied-front.png` + `satisfied-side.png` pair has also been used in a real finalized StudioNet lifecycle: work order `1` reached `ACCEPTED` in verification transaction [`0x744405...a58aa`](https://explorer-studio.genlayer.com/tx/0x744405bca0460a8c13b46301c81fb8140cc6d462f5d00285bcc76571106a58aa). The remediation and review fixtures remain deterministic test/demo assets and are not presented as live verdicts.
 
 Run:
 
@@ -150,6 +150,8 @@ python scripts/verify_demo_evidence.py
 to verify every committed fixture against its manifest.
 
 ## Quality checks
+
+Current CI verifies 27/27 Direct Mode tests, 14/14 source invariants, architecture-boundary checks, demo evidence integrity, frontend typecheck, and the production build. StudioNet deployment parity is verified separately by `scripts/verify_deployed_parity.py`.
 
 ```bash
 python -m pip install -r requirements-test.txt
@@ -170,4 +172,4 @@ The canonical Wearline contract is deployed on GenLayer StudioNet (chain ID `619
 - `contracts/Wearline.py` SHA-256: `9b3ae55724fd2e55ccf81296f31451db527a55c0f8e79119da8732ddbc344594`
 - Production frontend: https://wearline.vercel.app/
 
-The contract source is frozen at the deployment commit above. Later frontend/documentation commits do not modify `contracts/Wearline.py`. Live lifecycle evidence and explicit explorer/source parity confirmation are tracked in [`DEPLOYMENT.md`](DEPLOYMENT.md) and [`SUBMISSION.md`](SUBMISSION.md).
+The contract source is frozen at the deployment commit above. Later frontend, test, parity-verification and documentation commits do not modify the contract implementation. StudioNet source/schema parity is confirmed directly through `gen_getContractCode` and `gen_getContractSchema`. The finalized live `ACCEPTED` proof and full reviewer evidence are recorded in [`DEPLOYMENT.md`](DEPLOYMENT.md) and [`SUBMISSION.md`](SUBMISSION.md).
