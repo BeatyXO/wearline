@@ -6,6 +6,7 @@ export const CONTRACT_ADDRESS = import.meta.env.VITE_WEARLINE_CONTRACT_ADDRESS?.
 export const HAS_CONTRACT = Boolean(CONTRACT_ADDRESS)
 export const STUDIONET_CHAIN_ID = '0xf22f'
 export const STUDIONET_DECIMAL_CHAIN_ID = 61999
+const WALLET_DISCONNECTED_KEY = 'wearline.wallet.disconnected'
 
 export type InjectedProvider = {
   request: (args: { method: string; params?: unknown[] }) => Promise<unknown>
@@ -86,6 +87,7 @@ export async function switchToStudioNet() {
 }
 
 export async function disconnectInjectedWallet() {
+  window.localStorage.setItem(WALLET_DISCONNECTED_KEY, '1')
   if (!window.ethereum) return
   const injected = provider()
   try {
@@ -106,6 +108,7 @@ export async function walletClientForAccount(address: string) {
 }
 
 export async function connectWallet() {
+  window.localStorage.removeItem(WALLET_DISCONNECTED_KEY)
   const injected = provider()
   const accounts = (await injected.request({ method: 'eth_requestAccounts' })) as string[]
   if (!accounts?.[0]) throw new Error('Wallet returned no account.')
@@ -116,6 +119,7 @@ export async function connectWallet() {
 }
 
 export async function restoreWallet() {
+  if (window.localStorage.getItem(WALLET_DISCONNECTED_KEY) === '1') return null
   if (!window.ethereum) return null
   const injected = provider()
   const accounts = (await injected.request({ method: 'eth_accounts' })) as string[]
