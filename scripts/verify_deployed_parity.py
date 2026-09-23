@@ -47,7 +47,17 @@ def rpc(method: str, params: list[object]) -> object:
     request = urllib.request.Request(
         RPC_URL,
         data=payload,
-        headers={"content-type": "application/json"},
+        headers={
+            "content-type": "application/json",
+            "accept": "application/json",
+            "origin": "https://wearline.vercel.app",
+            "referer": "https://wearline.vercel.app/",
+            "user-agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/153.0.0.0 Safari/537.36"
+            ),
+        },
         method="POST",
     )
     with urllib.request.urlopen(request, timeout=30) as response:
