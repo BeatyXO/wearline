@@ -162,6 +162,12 @@ cd frontend && npm ci && npm run typecheck && npm run build
 
 ## Deployment status
 
-**Awaiting first canonical deployment.** Both `.env.example` files intentionally leave `VITE_WEARLINE_CONTRACT_ADDRESS` blank until deployment and source parity are proven.
+The canonical Wearline contract is deployed on GenLayer StudioNet (chain ID `61999`).
 
-The StudioNet address, deployment transaction, source commit, source SHA-256, and live lifecycle transactions belong in [`DEPLOYMENT.md`](DEPLOYMENT.md) and [`SUBMISSION.md`](SUBMISSION.md) after deployment.
+- Contract: [`0x9229d28C3786821c5D005952d04A9ecf565E46fF`](https://explorer-studio.genlayer.com/address/0x9229d28C3786821c5D005952d04A9ecf565E46fF)
+- Deployment transaction: [`0xf49afa3c9b2245e9db1f226ff2cba3efd7ae2df9279b79ef1f5fa4eea3f5751b`](https://explorer-studio.genlayer.com/tx/0xf49afa3c9b2245e9db1f226ff2cba3efd7ae2df9279b79ef1f5fa4eea3f5751b)
+- Deployed contract source commit: `9c56e390f7e589e14377e70aac347939fe7ee666`
+- `contracts/Wearline.py` SHA-256: `9b3ae55724fd2e55ccf81296f31451db527a55c0f8e79119da8732ddbc344594`
+- Production frontend: https://wearline.vercel.app/
+
+The contract source is frozen at the deployment commit above. Later frontend/documentation commits do not modify `contracts/Wearline.py`. Live lifecycle evidence and explicit explorer/source parity confirmation are tracked in [`DEPLOYMENT.md`](DEPLOYMENT.md) and [`SUBMISSION.md`](SUBMISSION.md).

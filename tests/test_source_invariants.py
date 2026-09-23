@@ -106,9 +106,10 @@ class SourceInvariantTests(unittest.TestCase):
         self.assertIn("one or two", public_copy)
         self.assertNotIn("evidence_url_3", CONTRACT)
 
-    def test_fresh_deployment_is_required(self):
-        self.assertEqual((ROOT / ".env.example").read_text(encoding="utf-8").strip(), "VITE_WEARLINE_CONTRACT_ADDRESS=")
-        self.assertEqual((ROOT / "frontend" / ".env.example").read_text(encoding="utf-8").strip(), "VITE_WEARLINE_CONTRACT_ADDRESS=")
+    def test_canonical_deployment_is_configured(self):
+        expected = "VITE_WEARLINE_CONTRACT_ADDRESS=0x9229d28C3786821c5D005952d04A9ecf565E46fF"
+        self.assertEqual((ROOT / ".env.example").read_text(encoding="utf-8").strip(), expected)
+        self.assertEqual((ROOT / "frontend" / ".env.example").read_text(encoding="utf-8").strip(), expected)
 
 
 if __name__ == "__main__":
