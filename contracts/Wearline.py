@@ -173,6 +173,7 @@ class Wearline(gl.Contract):
         acceptance_criterion: str,
         evidence_guidance: str,
     ) -> u32:
+        work_order_id = str(work_order_id)
         work_order = self._require_work_order(work_order_id)
         self._require_requester(work_order)
         if work_order.sealed or work_order.status != self.STATUS_DRAFT:
@@ -211,6 +212,7 @@ class Wearline(gl.Contract):
 
     @gl.public.write
     def seal_work_order(self, work_order_id: str) -> None:
+        work_order_id = str(work_order_id)
         work_order = self._require_work_order(work_order_id)
         self._require_requester(work_order)
         if work_order.status != self.STATUS_DRAFT:
@@ -232,6 +234,7 @@ class Wearline(gl.Contract):
         evidence_url_2: str,
         evidence_sha256_2: str,
     ) -> u32:
+        work_order_id = str(work_order_id)
         work_order = self._require_work_order(work_order_id)
         self._require_remediator(work_order)
         if work_order.status not in (self.STATUS_SEALED, self.STATUS_REVIEWING):
@@ -271,6 +274,7 @@ class Wearline(gl.Contract):
 
     @gl.public.write
     def verify_requirement(self, work_order_id: str, requirement_index: u32) -> None:
+        work_order_id = str(work_order_id)
         work_order_storage = self._require_work_order(work_order_id)
         if work_order_storage.status != self.STATUS_REVIEWING:
             raise gl.vm.UserError("work order is not in review")
@@ -421,10 +425,12 @@ Consistency rule: evidence_sufficient MUST be false for INCONCLUSIVE and true fo
 
     @gl.public.view
     def get_work_order(self, work_order_id: str) -> WorkOrder:
+        work_order_id = str(work_order_id)
         return self._require_work_order(work_order_id)
 
     @gl.public.view
     def get_requirement(self, work_order_id: str, requirement_index: u32) -> Requirement:
+        work_order_id = str(work_order_id)
         work_order = self._require_work_order(work_order_id)
         if requirement_index >= work_order.requirement_count:
             raise gl.vm.UserError("requirement index out of range")
@@ -432,6 +438,7 @@ Consistency rule: evidence_sufficient MUST be false for INCONCLUSIVE and true fo
 
     @gl.public.view
     def get_requirement_count(self, work_order_id: str) -> u32:
+        work_order_id = str(work_order_id)
         return self._require_work_order(work_order_id).requirement_count
 
     @gl.public.view
