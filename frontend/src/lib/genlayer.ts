@@ -101,10 +101,12 @@ export async function disconnectInjectedWallet() {
   }
 }
 
-export async function walletClientForAccount(address: string) {
-  const client = createClient({ chain: studionet, account: address as `0x${string}`, provider: window.ethereum as never })
-  await client.connect('studionet')
-  return client
+export function walletClientForAccount(address: string) {
+  return createClient({
+    chain: studionet,
+    account: address as `0x${string}`,
+    provider: window.ethereum as never,
+  })
 }
 
 export async function connectWallet() {
