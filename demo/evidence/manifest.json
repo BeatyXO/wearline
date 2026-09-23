@@ -8,26 +8,26 @@
     {
       "file": "satisfied-front.png",
       "scenario": "accepted-pair",
-      "sha256": "269aace69749b12e8f359737b97658b4c6f8540a9092866043fee49bd91c5455",
-      "bytes": 1435
+      "sha256": "9e2de095de4d634bb5df00eb69e3563903ded8846f1d2d23e9e272af3479c63f",
+      "bytes": 1243
     },
     {
       "file": "satisfied-side.png",
       "scenario": "accepted-pair",
-      "sha256": "d23096113a9ee20e26a9c53da0e9389e2c3e2f939ae3d9dac0cf2dc57538ad14",
-      "bytes": 1575
+      "sha256": "59fd1e802e9849cfb128dd0c7be7d921f5008b848a5d620cad75cf986ea17f7f",
+      "bytes": 1359
     },
     {
       "file": "remediation-required.png",
       "scenario": "remediation-required",
-      "sha256": "10f990c6d130830d08fed4f05bcfce141326671b192ca0ace2c38278bf6635e6",
-      "bytes": 1695
+      "sha256": "0ec5dc8e38d5f27a69d803cfc4c2ff61eac136b224096eb68b21c9a4185460b2",
+      "bytes": 1479
     },
     {
       "file": "review-required.png",
       "scenario": "review-required",
-      "sha256": "21d84fba110a8c4e94906d18b3802a004e120a1d052cc70b196d3f421cd62d18",
-      "bytes": 1701
+      "sha256": "8630c51bfbf531c3d43784239b1f6be9dcc55a73a7a5f00d9a247916442ff3c2",
+      "bytes": 1488
     }
   ]
 }
