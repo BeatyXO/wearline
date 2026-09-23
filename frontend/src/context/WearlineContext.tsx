@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import type { ReactNode } from 'react'
 import { connectWallet, readClient, readWearline, restoreWallet, writeWearline } from '../lib/genlayer'
+import type { InjectedProvider } from '../lib/genlayer'
 import type { RequirementView, WorkOrderView } from '../lib/types'
 
 function num(value: unknown) {
@@ -94,7 +95,7 @@ export function WearlineProvider({ children }: { children: ReactNode }) {
     }) }
 
     applyWalletState().catch(() => undefined)
-    const injected = window.ethereum
+    const injected = window.ethereum as InjectedProvider | undefined
     injected?.on?.('accountsChanged', handleWalletChange)
     injected?.on?.('chainChanged', handleWalletChange)
     return () => {
