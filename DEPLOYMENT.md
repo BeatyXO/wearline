@@ -9,9 +9,23 @@
 - Deployed contract source commit: `9c56e390f7e589e14377e70aac347939fe7ee666`
 - `contracts/Wearline.py` SHA-256: `9b3ae55724fd2e55ccf81296f31451db527a55c0f8e79119da8732ddbc344594`
 - Hosted frontend: https://wearline.vercel.app/
-- Explorer source/schema parity: **PENDING explicit confirmation**
+- StudioNet source/schema parity: **CONFIRMED** via `gen_getContractCode` + `gen_getContractSchema`
 
 The deployed contract source is frozen at `9c56e390f7e589e14377e70aac347939fe7ee666`. Subsequent frontend/documentation commits must leave `contracts/Wearline.py` byte-identical to the deployed source.
+
+## Deployed source/schema parity
+
+Verified against StudioNet RPC in GitHub Actions run:
+https://github.com/BeatyXO/wearline/actions/runs/35864312551
+
+- `gen_getContractCode` returned deployed source SHA-256: `9b3ae55724fd2e55ccf81296f31451db527a55c0f8e79119da8732ddbc344594`, exactly matching the recorded deployment-time hash.
+- The deployed source content matches `contracts/Wearline.py` after newline normalization. The repository checkout uses a different newline serialization, so its raw checkout SHA differs while normalized source content is identical.
+- `gen_getContractSchema` returned exactly the expected public surface:
+  - writes: `create_work_order`, `add_requirement`, `seal_work_order`, `submit_evidence_package`, `verify_requirement`
+  - views: `get_work_order`, `get_requirement`, `get_requirement_count`, `get_next_work_order_id`, `get_latest_work_order_for_requester`
+- No unexpected payable write method was present.
+
+The reusable parity check is committed at `scripts/verify_deployed_parity.py`.
 
 ## Validation already confirmed
 
