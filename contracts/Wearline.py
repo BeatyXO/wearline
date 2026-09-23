@@ -149,9 +149,10 @@ class Wearline(gl.Contract):
 
         work_order_id = str(int(self.next_work_order_id))
         self.next_work_order_id = self.next_work_order_id + u64(1)
+        normalized_remediator = remediator if isinstance(remediator, Address) else Address(remediator)
         self.work_orders[work_order_id] = WorkOrder(
             requester=gl.message.sender_address,
-            remediator=Address(remediator),
+            remediator=normalized_remediator,
             title=normalized_title,
             scope_summary=normalized_scope,
             status=self.STATUS_DRAFT,
