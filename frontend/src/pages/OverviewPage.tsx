@@ -8,7 +8,7 @@ export function OverviewPage({ onStart }: { onStart: () => void }) {
       <div className="hero-copy"><span className="kicker">Wearline</span><h2>Completion evidence, judged against frozen requirements.</h2><p>Break a physical work scope into atomic acceptance criteria. The remediator submits one or two completion-proof artifacts per requirement. GenLayer verifies each requirement independently, then the contract derives the final compliance report.</p><button className="primary" onClick={onStart}>Open work order <ArrowRight size={16}/></button></div>
       <div className="hero-grid">
         <div><FileLock2/><span>01</span><strong>Freeze specification</strong><p>Scope and atomic acceptance criteria become immutable before proof is submitted.</p></div>
-        <div><Images/><span>02</span><strong>Submit proof package</strong><p>Up to three hash-pinned completion images support each individual requirement.</p></div>
+        <div><Images/><span>02</span><strong>Submit proof package</strong><p>One or two hash-pinned completion images support each individual requirement.</p></div>
         <div><ListChecks/><span>03</span><strong>Verify requirement</strong><p>Validators independently reproduce the bounded requirement-level judgment.</p></div>
         <div><Scale/><span>04</span><strong>Derive report</strong><p>Contract logic maps all requirement outcomes to the final work-order result.</p></div>
       </div>
