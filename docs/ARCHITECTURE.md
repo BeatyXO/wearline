@@ -4,7 +4,7 @@
 
 Wearline is a **physical work specification-compliance protocol**. Its job is to answer a series of bounded requirement-level questions and produce an auditable final compliance report.
 
-It does not compare tenancy condition, calculate damage, hold deposits, price repairs, determine liability, or move funds.
+The protocol keeps judgment at the requirement layer and leaves workflow policy deterministic. Its output is a compliance record; it does not custody or transfer value.
 
 ## State model
 
